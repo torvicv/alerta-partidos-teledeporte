@@ -58,7 +58,7 @@
         }
 
         if($contador > 0){
-            $to = "torvicv@gmail.com";
+            $to = "******@gmail.com";
             $mySubject = "$contador partidos en teledeporte.";
             $txt = "$texto_filtrado";
             
