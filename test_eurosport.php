@@ -34,7 +34,7 @@ if($contador_eurosport > 0){
             
     if(mail($to, $mySubject, $txt) === TRUE){
         echo 'Email enviado.';
-        echo $contador;
+        echo $contador_eurosport;
     }else{
         echo 'Email no enviado.';
     }
