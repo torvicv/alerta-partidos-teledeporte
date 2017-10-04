@@ -32,7 +32,7 @@
         while(!feof($f)) {
             // guarda en la variable cada linea hasta un salto de linea
             $dondeBuscar = stream_get_line($f,10000,"<br>");
-            $deportes = array("tenis", "golf");
+            $deportes = array("volei", "voley");
             $dom = new DOMDocument();
 
             $dom->loadHtml($dondeBuscar);
@@ -58,7 +58,7 @@
         }
 
         if($contador > 0){
-            $to = "******@gmail.com";
+            $to = "torvicv@gmail.com";
             $mySubject = "$contador partidos en teledeporte.";
             $txt = "$texto_filtrado";
             

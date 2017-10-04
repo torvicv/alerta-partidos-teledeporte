@@ -1,4 +1,5 @@
 <?php
+
 include 'simple_html_dom.php';
 
 $html = new simple_html_dom();
@@ -18,8 +19,8 @@ foreach ($viento as $items){
         
         if($encontrado_viento_hora !== FALSE){
             foreach ($coincidencia as $c){
-                echo $c."<br>";
-                if($c >= 9.00){
+                //echo $c."<br>";
+                if($c >= 10.00){
                     $texto_viento = trim($c, ".");
                     $texto_viento2 .= $texto_viento." km/h - a las ";
                     $texto_viento2 .= $v->parent()->parent()->parent()->first_child()->first_child()->plaintext."\n";
@@ -31,7 +32,49 @@ foreach ($viento as $items){
     
 }
 
+$token = "382393087:AAHkpDq186ReLvgASxjbo5-dms3OeEu89eg";
+
+$website = "https://api.telegram.org/bot".$token;
+
+/*$update = file_get_contents('php://input');
+$update = json_decode($update, TRUE);*/
+
+//$chatId = $update["message"]["chat"]["id"];
+/*$message = $update["message"]["text"];
+ *
+
+switch ($message) {
+    case "viento":
+        vientos($chatId);
+        break;
+
+    default:
+        introducir($chatId);
+        break;
+}*/
+
+$chatId = array("9151688", "8390168");
+function enviaMensaje($chatId, $mensaje){
+    $url = "$GLOBALS[website]/sendMessage?chat_id=$chatId&text=".urlencode($mensaje);
+    file_get_contents($url);
+}
+
+
+function vientos($chatId){
+    $mensaje = $GLOBALS['texto_viento2'];
+    enviaMensaje($chatId, $mensaje);
+}
+
+/*function introducir($chatId){
+    $mensaje = "Introduzca la palabra viento para saber las alarmas de viento en Sevilla.";
+    enviaMensaje($chatId, $mensaje);
+}*/
 if($contador_vientos > 0){
+    foreach ($chatId as $id){
+        vientos($id);
+    }
+}
+/*if($contador_vientos > 0){
             $to = "torvicv@gmail.com";
             $mySubject = "Hay $contador_vientos alertas por viento!!!.";
             $txt = "$texto_viento2";
@@ -42,4 +85,4 @@ if($contador_vientos > 0){
             }else{
                 echo 'Email no enviado.';
             }
-        }
+        }*/
